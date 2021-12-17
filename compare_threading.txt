@@ -1,0 +1,59 @@
+non parallel processing:
+Loading keras model from model
+Url #0 have been processed (error=None, bytes downloaded=480563, time=1.0440237522125244)
+Url #1 have been processed (error=None, bytes downloaded=32583, time=0.3228731155395508)
+Url #2 have been processed (error=None, bytes downloaded=82070, time=0.5136559009552002)
+Url #3 have been processed (error=None, bytes downloaded=9434, time=0.2232832908630371)
+Url #4 have been processed (error=None, bytes downloaded=38402, time=0.2507009506225586)
+Url #5 have been processed (error=<urlopen error [Errno 61] Connection refused>, bytes downloaded=0, time=0.0009458065032958984)
+Url #6 have been processed (error=HTTP Error 404: Not Found, bytes downloaded=0, time=0.8172779083251953)
+Url #7 have been processed (error=cannot identify image file <_io.BytesIO object at 0x14ab8e720>, bytes downloaded=226104, time=1.323988914489746)
+Total time: 9.682079076766968
+Total accumulated time: 4.496749639511108
+Total files downloaded: 6
+Total bytes downloaded: 869156
+Total errors: 3
+Total files saved: 5
+Cats: 60.0%
+Dogs: 40.0%
+
+
+parallel processing with 4 threads:
+Loading keras model from model
+Url #2 have been processed (error=None, bytes downloaded=82070, time=1.219628095626831)
+Url #3 have been processed (error=None, bytes downloaded=9434, time=1.2366089820861816)
+Url #1 have been processed (error=None, bytes downloaded=32583, time=1.2381281852722168)
+Url #5 have been processed (error=<urlopen error [Errno 61] Connection refused>, bytes downloaded=0, time=0.0015091896057128906)
+Url #0 have been processed (error=None, bytes downloaded=480563, time=1.2515668869018555)
+Url #4 have been processed (error=None, bytes downloaded=38402, time=0.23870515823364258)
+Url #6 have been processed (error=HTTP Error 404: Not Found, bytes downloaded=0, time=0.687781810760498)
+Url #7 have been processed (error=cannot identify image file <_io.BytesIO object at 0x140569e50>, bytes downloaded=226104, time=1.2892940044403076)
+Total time: 8.415952205657959
+Total accumulated time: 7.163222312927246
+Total files downloaded: 6
+Total bytes downloaded: 869156
+Total errors: 3
+Total files saved: 5
+Cats: 60.0%
+Dogs: 40.0%
+
+
+parallel processing with 6 threads:
+Loading keras model from model
+Url #5 have been processed (error=<urlopen error [Errno 61] Connection refused>, bytes downloaded=0, time=0.05955100059509277)
+Url #6 have been processed (error=HTTP Error 404: Not Found, bytes downloaded=0, time=0.918198823928833)
+Url #1 have been processed (error=None, bytes downloaded=32583, time=1.1326360702514648)
+Url #3 have been processed (error=None, bytes downloaded=9434, time=1.1352078914642334)
+Url #2 have been processed (error=None, bytes downloaded=82070, time=1.1382272243499756)
+Url #0 have been processed (error=None, bytes downloaded=480563, time=1.1456270217895508)
+Url #4 have been processed (error=None, bytes downloaded=38402, time=1.149487018585205)
+Url #7 have been processed (error=cannot identify image file <_io.BytesIO object at 0x1429df450>, bytes downloaded=226104, time=1.2947719097137451)
+Total time: 7.453864336013794
+Total accumulated time: 7.973706960678101
+Total files downloaded: 6
+Total bytes downloaded: 869156
+Total errors: 3
+Total files saved: 5
+Cats: 60.0%
+Dogs: 40.0%
+
