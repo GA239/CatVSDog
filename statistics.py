@@ -1,4 +1,7 @@
 from time import time
+from collections import namedtuple
+
+TotalResult = namedtuple('TotalResult', 'source threads number time')
 
 
 class Stats:
@@ -10,21 +13,23 @@ class Stats:
         self.download_errors = 0
         self.cats_count = 0
         self.dogs_count = 0
-        self.total_time = 0
+        self.total_result = None
 
     def __repr__(self):
         """Representation of all statistics.
 
         :return: Enumeration of statistics with useful for users format."""
         total_img = self.cats_count + self.dogs_count
-        return f"Downloaded files: {self.downloaded_files}\n" \
+        return "Statistics: \n" \
+               f"Downloaded files: {self.downloaded_files}\n" \
                f"Downloaded bytes: {self.downloaded_bytes}\n" \
                f"Download errors: {self.download_errors}\n" \
                f"Total images: {total_img}\n" \
                f"Cats percentage: {self.cats_count / total_img * 100 if total_img != 0 else 0.0:.2f}%\n" \
                f"Dogs percentage: {self.dogs_count / total_img * 100 if total_img != 0 else 0.0:.2f}%\n" \
-               f"Total execution time: {self.total_time} seconds\n" \
-               "-" * 26
+               f"Total execution time with {self.total_result.source} source, {self.total_result.threads} threads " \
+               f"and {self.total_result.number} elements is {self.total_result.time} seconds\n" \
+               f"{'-' * 26}"
 
     def download_stats(self):
         """Decorator for counting of successes, bytes and errors."""
@@ -70,9 +75,7 @@ class Stats:
                 """
                 start_time = time()
                 result = func(source, threads, number)
-                self.total_time = time() - start_time
-                print(f'Total execution time with {source} source, {threads} threads '
-                      f'and {number} elements is {self.total_time} seconds')
+                self.total_result = TotalResult(source, threads, number, time() - start_time)
                 return result
             return wrapper
         return decorator

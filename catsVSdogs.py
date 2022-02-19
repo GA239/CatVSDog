@@ -39,34 +39,28 @@ def process(source: str, threads: int, number: int = None):
     classifier.classify_images(png_files, image_path=image_path)
 
 
-def main():
+if __name__ == "__main__":
     args = read_args()
     process(source=args.urllist, threads=args.threads, number=args.elems)
     print(global_stats)
 
-
-if __name__ == "__main__":
-    main()
-
 """
 Results of execution (for demo):
 
-Total execution time with urllist.txt source, 1 threads and 100 elements is 70.67821097373962 seconds
 Downloaded files: 54
 Downloaded bytes: 6208667
 Download errors: 46
 Total images: 54
 Cats percentage: 68.52%
 Dogs percentage: 31.48%
-Total execution time: 70.67821097373962 seconds
+Total execution time with urllist.txt source, 1 threads and 100 elements is 70.67821097373962 seconds
 --------------------------
-Total execution time with urllist.txt source, 4 threads and 100 elements is 26.973176956176758 seconds
 Downloaded files: 55
 Downloaded bytes: 6335708
 Download errors: 45
 Total images: 55
 Cats percentage: 69.09%
 Dogs percentage: 30.91%
-Total execution time: 26.973176956176758 seconds
+Total execution time with urllist.txt source, 4 threads and 100 elements is 26.973176956176758 seconds
 -------------------------
 """
