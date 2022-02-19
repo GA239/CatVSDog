@@ -23,7 +23,7 @@ class Loader:
         :param source: the text file with list of urls
         :param threads: number of threads for multithread downloading
         """
-        self.urls = Loader._get_urls(source)
+        self.urls = self._get_urls(source)
         self.threads = threads
 
     @staticmethod
@@ -56,7 +56,6 @@ class Loader:
             file.write(data)
         return destination, len(data)
 
-    @Stats.time_stats
     def download_images(self, image_path: str, image_format: str, number: int = None) -> List[str]:
         """Download all images with multithreading.
 
@@ -69,7 +68,7 @@ class Loader:
         ext = image_format.lower()
         with ThreadPoolExecutor(max_workers=self.threads) as executor:
             url_list = self.urls[:number] if number is not None and number >= 0 else self.urls
-            futures = [executor.submit(Loader.download, url, os.path.join(image_path, ext, f'{i:05}.{ext}'))
+            futures = [executor.submit(self.download, url, os.path.join(image_path, ext, f'{i:05}.{ext}'))
                        for i, url in enumerate(url_list)]
         return [filename for filename, length in
                 map(lambda future: future.result(), as_completed(futures))
@@ -110,7 +109,6 @@ class SizeAndFormatConverter:
             out = img.resize(self.size)
         out.save(destination, self.format)
 
-    @Stats.time_stats
     def convert_images(self, jpg_files: List[str], image_path: str) -> List[str]:
         """
         Convert all images with the size and the format.
@@ -143,7 +141,7 @@ class Classifier:
 
         :param model_path: path to the pretrained classification model
         """
-        self.model = Classifier._load_tf_model(model_path)
+        self.model = self._load_tf_model(model_path)
 
     @staticmethod
     def _load_tf_model(path: str) -> keras.Model:
@@ -171,7 +169,6 @@ class Classifier:
         img_expended = np.expand_dims(img_array, axis=0)
         return self.model.predict(img_expended)[0][0] < 0.5
 
-    @Stats.time_stats
     def classify_images(self, source_files: List[str], image_path: str):
         """
         Classify all converted images on cats and dogs.

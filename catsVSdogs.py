@@ -1,6 +1,7 @@
 """the task can be found there https://github.com/GA239/CatVSDog
 fork the repo and implement the solution."""
 import argparse
+
 from util import Loader, SizeAndFormatConverter, Classifier, global_stats
 
 
@@ -38,10 +39,14 @@ def process(source: str, threads: int, number: int = None):
     classifier.classify_images(png_files, image_path=image_path)
 
 
-args = read_args()
-process(source=args.urllist, threads=args.threads, number=args.elems)
-print(global_stats)
+def main():
+    args = read_args()
+    process(source=args.urllist, threads=args.threads, number=args.elems)
+    print(global_stats)
 
+
+if __name__ == "__main__":
+    main()
 
 """
 Results of execution (for demo):

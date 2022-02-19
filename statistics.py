@@ -24,10 +24,10 @@ class Stats:
                f"Cats percentage: {self.cats_count / total_img * 100 if total_img != 0 else 0.0:.2f}%\n" \
                f"Dogs percentage: {self.dogs_count / total_img * 100 if total_img != 0 else 0.0:.2f}%\n" \
                f"Total execution time: {self.total_time} seconds\n" \
-               f"--------------------------"
+               "-" * 26
 
     def download_stats(self):
-        """Parametrized decorator for counting of successes, bytes and errors."""
+        """Decorator for counting of successes, bytes and errors."""
         def decorator(func):
             def wrapper(*args, **kwargs):
                 """Count results of downloading and print information about it if it has been successful."""
@@ -45,7 +45,7 @@ class Stats:
         return decorator
 
     def classify_stats(self):
-        """Parametrized decorator for counting cats and dogs."""
+        """Decorator for counting cats and dogs."""
         def decorator(func):
             def wrapper(*args, **kwargs):
                 """Depending on the result increase count of cats or dogs."""
@@ -58,20 +58,8 @@ class Stats:
             return wrapper
         return decorator
 
-    @staticmethod
-    def time_stats(func):
-        """Decorator for measuring time of any method's working"""
-        def wrapper(*args, **kwargs):
-            """Measure time and print it with method name."""
-            start_time = time()
-            result = func(*args, **kwargs)
-            print(f'Method {func.__name__} execution time is '
-                  f'{time() - start_time} seconds')
-            return result
-        return wrapper
-
     def total_time_stats(self):
-        """Parametrized decorator for measuring of the total time of programme's working."""
+        """Decorator for measuring of the total time of programme's working."""
         def decorator(func):
             def wrapper(source: str, threads: int, number: int):
                 """Measure time and save it to total_time variable.
